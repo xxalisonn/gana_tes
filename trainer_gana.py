@@ -135,6 +135,22 @@ class Trainer:
 
             self.symbol2id = symbol_id
             self.symbol2vec = embeddings
+        
+        else:
+            i = 0
+            for key in rel2id.keys():
+                if key not in ['', 'OOV']:
+                    symbol_id[key] = i
+                    symbol_idinv[i] = key
+                    i += 1
+            for key in ent2id.keys():
+                if key not in ['', 'OOV']:
+                    symbol_id[key] = i
+                    symbol_idinv[i] = key
+                    i += 1
+            symbol_id['PAD'] = i
+            self.symbol2id = symbol_id
+            
             #print(symbol_idinv)
             #exit(-1)
 
