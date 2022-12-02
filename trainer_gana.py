@@ -159,7 +159,7 @@ class Trainer:
         self.connections = (np.ones((self.num_ents, max_, 3)) * self.pad_id).astype(int)
         self.e1_rele2 = defaultdict(list)
         self.e1_degrees = defaultdict(int)
-        with open(self.data_path + '/path_graph') as f:
+        with open(self.data_path + '/path_graph.json') as f:
             lines = f.readlines()
             for line in tqdm(lines):
                 e1, rel, e2 = line.rstrip().split()
