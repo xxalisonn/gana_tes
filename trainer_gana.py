@@ -159,12 +159,17 @@ class Trainer:
         self.connections = (np.ones((self.num_ents, max_, 3)) * self.pad_id).astype(int)
         self.e1_rele2 = defaultdict(list)
         self.e1_degrees = defaultdict(int)
-        with open(self.data_path + '/path_graph.json') as f:
-            lines = f.readlines()
-            for line in tqdm(lines):
-                e1, rel, e2 = line.rstrip().split()
-                self.e1_rele2[e1].append((self.symbol2id[e1], self.symbol2id[rel], self.symbol2id[e2]))
-                self.e1_rele2[e2].append((self.symbol2id[e2], self.symbol2id[rel + '_inv'], self.symbol2id[e1]))
+        lines = json.load(open('./COVID19/path_graph.json'))
+        for line in lines:
+            e1, rel, e2 = line
+            self.e1_rele2[e1].append((self.symbol2id[e1], self.symbol2id[rel], self.symbol2id[e2]))
+            self.e1_rele2[e2].append((self.symbol2id[e2], self.symbol2id[rel + '_inv'], self.symbol2id[e1]))
+#         with open(self.data_path + '/path_graph.json') as f:
+#             lines = f.readlines()
+#             for line in tqdm(lines):
+#                 e1, rel, e2 = line.rstrip().split()
+#                 self.e1_rele2[e1].append((self.symbol2id[e1], self.symbol2id[rel], self.symbol2id[e2]))
+#                 self.e1_rele2[e2].append((self.symbol2id[e2], self.symbol2id[rel + '_inv'], self.symbol2id[e1]))
 
         degrees = {}
         for ent, id_ in self.ent2id.items():
