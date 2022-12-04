@@ -159,7 +159,7 @@ class Trainer:
         self.connections = (np.ones((self.num_ents, max_, 3)) * self.pad_id).astype(int)
         self.e1_rele2 = defaultdict(list)
         self.e1_degrees = defaultdict(int)
-        lines = json.load(open('./COVID19/path_graph.json'))
+        lines = json.load(open(self.data_path + '/path_graph.json'))
         for line in lines:
             e1, rel, e2 = line
             self.e1_rele2[e1].append((self.symbol2id[e1], self.symbol2id[rel], self.symbol2id[e2]))
